@@ -22,7 +22,7 @@ void op_push(stack_t **stack, unsigned int span)
 		fprintf(stderr, "Error: malloc failed\n");
 		exit(EXIT_FAILURE);
 	}
-	var.s_len++;
+	flag.s_len++;
 }
 
 /**
@@ -54,7 +54,7 @@ void op_pint(stack_t **stack, unsigned int span)
 {
 	stack_t *head = *stack;
 
-	if (var.s_len == 0)
+	if (flag.s_len == 0)
 	{
 		fprintf(stderr, "L%u: can't pint, stack empty\n", span);
 		exit(EXIT_FAILURE);
@@ -71,19 +71,19 @@ void op_pop(stack_t **stack, unsigned int span)
 {
 	stack_t *pop = *stack;
 
-	if (var.s_len == 0)
+	if (flag.s_len == 0)
 	{
 		fprintf(stderr, "L%u: can't pop an empty stack\n", span);
 		exit(EXIT_FAILURE);
 	}
 	(*stack)->next->prev = (*stack)->prev;
 	(*stack)->prev->next = (*stack)->next;
-	if (var.s_len != 1)
+	if (flag.s_len != 1)
 		*stack = (*stack)->next;
 	else
 		*stack = NULL;
 	free(pop);
-	var.s_len--;
+	flag.s_len--;
 }
 
 /**
@@ -95,12 +95,12 @@ void op_swap(stack_t **stack, unsigned int span __attribute__((unused)))
 {
 	stack_t *tmp;
 
-	if (var.s_len < 2)
+	if (flag.s_len < 2)
 	{
 		fprintf(stderr, "L%u: can't swap, stack too short\n", span);
 		exit(EXIT_FAILURE);
 	}
-	if (var.s_len == 2)
+	if (flag.s_len == 2)
 	{
 		*stack = (*stack)->next;
 		return;
