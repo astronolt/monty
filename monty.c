@@ -1,7 +1,7 @@
 #include "monty.h"
 
 /* global struct to hold flag for queue and stack length */
-var_t flag;
+var_t var;
 
 /**
  * free_stack - frees malloced in stack nodes memory
@@ -27,7 +27,7 @@ void free_stack(int status, void *arg)
 		free(*stack);
 		*stack = tmp;
 	}
-	flag.s_len = 0;
+	var.s_len = 0;
 }
 
 /**
@@ -75,8 +75,8 @@ int main(int argc, char *argv[])
 	char *lineptr = NULL, *oper = NULL;
 	size_t llen = 0;
 
-	flag.q_len = 0;
-	flag.s_len = 0;
+	var.q_len = 0;
+	var.s_len = 0;
 	if (argc != 2)
 	{
 		fprintf(stderr, "USAGE: monty file\n");
